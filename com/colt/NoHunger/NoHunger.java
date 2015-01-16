@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class NoHunger extends JavaPlugin implements Listener{
        
         public void onEnable(){
-          saveConfig();
+            saveConfig();
             Bukkit.getPluginManager().registerEvents(this, this);
         }
        
