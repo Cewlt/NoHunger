@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class NoHunger extends JavaPlugin implements Listener{
        
         public void onEnable(){
-            saveConfig();
+        	   saveConfig();
             Bukkit.getPluginManager().registerEvents(this, this);
         }
        
@@ -20,12 +20,14 @@ public class NoHunger extends JavaPlugin implements Listener{
         public void hunger(FoodLevelChangeEvent e) {
                 if(e.getEntity() instanceof Player) {
                 	Player p = (Player)e.getEntity();
+                	if(p.hasPermission("nohunger.use")) {
                 	List<String> worlds = getConfig().getStringList("worlds");
                 	for(String w : worlds) {
                 		if(p.getWorld().equals(w)) {
                 			e.setCancelled(true);
                 			p.setFoodLevel(20);
                 		}
+                	}
                 	}
                 }
         }
