@@ -12,8 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class NoHunger extends JavaPlugin implements Listener{
        
         public void onEnable(){
-        	   saveDefaultConfig();
-            Bukkit.getPluginManager().registerEvents(this, this);
+        saveDefaultConfig();
+        Bukkit.getPluginManager().registerEvents(this, this);
         }
        
         @EventHandler
