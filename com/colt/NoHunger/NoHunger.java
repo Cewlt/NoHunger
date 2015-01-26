@@ -10,27 +10,30 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
  
-public class NoHunger extends JavaPlugin implements Listener{
+public class NoHunger extends JavaPlugin implements Listener {
        
-        public void onEnable(){
+        public void onEnable() {
         	saveDefaultConfig();
-            Bukkit.getPluginManager().registerEvents(this, this);
+         Bukkit.getPluginManager().registerEvents(this, this);
         }
        
         @EventHandler
-        public void hunger(FoodLevelChangeEvent e) {
-                if(e.getEntity() instanceof Player) {
-                	Player p = (Player)e.getEntity();
-                	if(p.hasPermission("nohunger.use")) {
-                	List<String> worlds = getConfig().getStringList("worlds");
-                	for(String w : worlds) {
-            			World world = Bukkit.getWorld(w);
-            			if(p.getWorld().equals(world)) {
-                			e.setCancelled(true);
-                			p.setFoodLevel(20);
-                		}
-                	}
-                	}
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            if (player.hasPermission("nohunger.use")) {
+                List<String> worlds = getConfig().getStringList("worlds");
+                for (String w : worlds) {
+                    World world = Bukkit.getWorld(w);
+                    if (player.getWorld().equals(world)) {
+                        if (player.getHealth() != 20.0) {
+                            player.setHealth(20.0D);
+                        }
+                        event.setCancelled( true );
+                        break;
+                    }
                 }
+            }
         }
+    }
 }
