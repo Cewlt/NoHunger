@@ -1,0 +1,6 @@
+# Exact world names are important, as in upper/lower case letters.
+# For example "world" will work but "WoRld" will not.
+worlds:
+  - world
+  - world_nether
+  - world_the_end
